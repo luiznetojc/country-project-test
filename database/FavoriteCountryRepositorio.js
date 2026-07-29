@@ -21,4 +21,4 @@ function listarPaises(callback){
     })
 }
 
-export { criar, listarTodos}
+export { criarPais, listarPaises}
