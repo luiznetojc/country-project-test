@@ -1,11 +1,13 @@
+import '../database/connection.js'
 import express from "express"
+
 
 const app = express()
 
-const porta = 3000
+const port = 3000
 
 
-app.listen(porta , () =>{
+app.listen(port , () =>{
     console.log("Servidor Funcionando!")
 })
 
