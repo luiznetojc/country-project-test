@@ -1,4 +1,6 @@
+import '../database/conexao.js'
 import express from "express"
+
 
 const app = express()
 
