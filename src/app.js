@@ -1,5 +1,7 @@
 import '../database/connection.js'
 import express from "express"
+import { getCountry } from './controllers/countryController.js'
+import 'dotenv/config'
 
 
 const app = express()
@@ -14,3 +16,5 @@ app.listen(port , () =>{
 app.get("/", (req,res) => {
     res.send("Api Funcionando")
 })
+
+app.get("/countries/:name",getCountry)
