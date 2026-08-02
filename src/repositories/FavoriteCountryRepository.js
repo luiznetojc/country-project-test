@@ -21,4 +21,24 @@ function getAllCountries(callback){
     })
 }
 
-export { createCountry, getAllCountries}
+function getCountryById(id, callback){
+    db.get('SELECT * FROM FavoriteCountry WHERE Id = ?', [id], (error, row) => {
+        if (error) {
+            callback(error, null)
+        } else {
+            callback(null, row)
+        }
+    })
+}
+
+function getCountryByName(name, callback){
+    db.get('SELECT * FROM FavoriteCountry WHERE Name = ?', [name], (error, row) => {
+        if (error) {
+            callback(error, null)
+        } else {
+            callback(null, row)
+        }
+    })
+}
+
+export { createCountry , getAllCountries , getCountryById, getCountryByName}
