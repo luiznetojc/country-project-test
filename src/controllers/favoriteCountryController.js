@@ -1,4 +1,4 @@
-import { saveFavoriteCountry, listFavoriteCountries, getFavoriteById } from "../services/favoriteCountryService.js"
+import { saveFavoriteCountry, listFavoriteCountries, getFavoriteById,updateFavoriteCountry } from "../services/favoriteCountryService.js"
 
 const createFavorite = async (req, res) => {
     const { countryName } = req.body
@@ -52,5 +52,30 @@ const getFavoriteByIdController = async (req, res) => {
     }
 }
 
+const updateFavorite = async (req, res) => {
+    const { id } = req.params
+    const { countryName } = req.body
 
-export { createFavorite, getFavorites, getFavoriteByIdController }
+    if (!countryName) {
+        return res.status(400).json({ message: "O campo countryName é obrigatório" })
+    }
+
+    try {
+        const result = await updateFavoriteCountry(id, countryName)
+
+        if (result === "NOT_FOUND") {
+            return res.status(404).json({ message: "Favorito não encontrado" })
+        }
+
+        if (result === "COUNTRY_NOT_FOUND") {
+            return res.status(404).json({ message: "País não encontrado" })
+        }
+
+        res.status(200).json(result)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Erro ao atualizar favorito" })
+    }
+}
+
+export { createFavorite, getFavorites, getFavoriteByIdController, updateFavorite }

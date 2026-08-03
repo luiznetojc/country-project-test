@@ -1,5 +1,5 @@
 import { searchCountryByName } from "./countryService.js"
-import { createCountry, getAllCountries, getCountryById ,getCountryByName} from "../repositories/FavoriteCountryRepository.js"
+import { createCountry, getAllCountries, getCountryById ,getCountryByName,updateCountry} from "../repositories/FavoriteCountryRepository.js"
 
 
 const saveFavoriteCountry = async (countryName) => {
@@ -64,6 +64,41 @@ const getFavoriteById = (id) => {
     })
 }
 
+const updateFavoriteCountry = async (id, countryName) => {
+    const existingRecord = await new Promise((resolve, reject) => {
+        getCountryById(id, (error, record) => {
+            if (error) reject(error)
+            else resolve(record)
+        })
+    })
+
+    if (!existingRecord) {
+        return "NOT_FOUND"
+    }
+
+    const result = await searchCountryByName(countryName)
+    const countries = result.data.objects
+
+    if (countries.length === 0) {
+        return "COUNTRY_NOT_FOUND"
+    }
+
+    const country = countries[0]
+
+    const countryData = {
+        name: country.names.common,
+        capital: country.capitals?.[0]?.name || null,
+        region: country.region,
+        population: country.population
+    }
+
+    return new Promise((resolve, reject) => {
+        updateCountry(id, countryData, (error, updatedRecord) => {
+            if (error) reject(error)
+            else resolve(updatedRecord)
+        })
+    })
+}
 
 
-export { saveFavoriteCountry, listFavoriteCountries, getFavoriteById}
+export { saveFavoriteCountry, listFavoriteCountries, getFavoriteById,updateFavoriteCountry}

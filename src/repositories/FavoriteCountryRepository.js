@@ -41,4 +41,17 @@ function getCountryByName(name, callback){
     })
 }
 
-export { createCountry , getAllCountries , getCountryById, getCountryByName}
+function updateCountry(id, country, callback){
+    const sql = `UPDATE FavoriteCountry SET Name = ?, Capital = ?, Region = ?, Population = ? WHERE Id = ?`
+    db.run(sql, [country.name, country.capital, country.region, country.population, id], function(error){
+        if(error){
+            callback(error, null)
+        } else if (this.changes === 0) {
+            callback(null, null) // nenhum registro foi atualizado (ID não existe)
+        } else {
+            callback(null, { id: Number(id), ...country })
+        }
+    })
+}
+
+export { createCountry , getAllCountries , getCountryById, getCountryByName, updateCountry}
