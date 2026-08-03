@@ -11,11 +11,11 @@ const db = new sqlite3.Database("./database/database.sqlite",(error) => {
 db.run(` 
     CREATE TABLE IF NOT EXISTS FavoriteCountry (
         Id INTEGER PRIMARY KEY AUTOINCREMENT,
-        Nome TEXT NOT NULL,
+        Name TEXT NOT NULL,
         Capital TEXT,
-        Regiao TEXT,
-        Populacao INTEGER,
-        DataCadastro TEXT DEFAULT CURRENT_TIMESTAMP
+        Region TEXT,
+        Population INTEGER,
+        DateRegistration TEXT DEFAULT CURRENT_TIMESTAMP
 
     )
 `, (error) => {
