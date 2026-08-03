@@ -54,4 +54,17 @@ function updateCountry(id, country, callback){
     })
 }
 
-export { createCountry , getAllCountries , getCountryById, getCountryByName, updateCountry}
+function deleteCountry(id, callback){
+    const sql = `DELETE FROM FavoriteCountry WHERE Id = ?`
+    db.run(sql, [id], function(error){
+        if(error){
+            callback(error, null)
+        } else if (this.changes === 0) {
+            callback(null, false) // nenhum registro deletado (ID não existe)
+        } else {
+            callback(null, true)
+        }
+    })
+}
+
+export { createCountry , getAllCountries , getCountryById, getCountryByName, updateCountry,deleteCountry}

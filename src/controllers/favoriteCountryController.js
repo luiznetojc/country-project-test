@@ -1,4 +1,4 @@
-import { saveFavoriteCountry, listFavoriteCountries, getFavoriteById,updateFavoriteCountry } from "../services/favoriteCountryService.js"
+import { saveFavoriteCountry, listFavoriteCountries, getFavoriteById,updateFavoriteCountry ,deleteFavoriteCountry} from "../services/favoriteCountryService.js"
 
 const createFavorite = async (req, res) => {
     const { countryName } = req.body
@@ -78,4 +78,22 @@ const updateFavorite = async (req, res) => {
     }
 }
 
-export { createFavorite, getFavorites, getFavoriteByIdController, updateFavorite }
+
+const deleteFavorite = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        const wasDeleted = await deleteFavoriteCountry(id)
+
+        if (!wasDeleted) {
+            return res.status(404).json({ message: "Favorito não encontrado" })
+        }
+
+        res.status(204).send()
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Erro ao excluir favorito" })
+    }
+}
+
+export { createFavorite, getFavorites, getFavoriteByIdController, updateFavorite ,deleteFavorite}

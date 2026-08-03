@@ -1,5 +1,5 @@
 import { searchCountryByName } from "./countryService.js"
-import { createCountry, getAllCountries, getCountryById ,getCountryByName,updateCountry} from "../repositories/FavoriteCountryRepository.js"
+import { createCountry, getAllCountries, getCountryById ,getCountryByName,updateCountry,deleteCountry} from "../repositories/FavoriteCountryRepository.js"
 
 
 const saveFavoriteCountry = async (countryName) => {
@@ -100,5 +100,14 @@ const updateFavoriteCountry = async (id, countryName) => {
     })
 }
 
+const deleteFavoriteCountry = (id) => {
+    return new Promise((resolve, reject) => {
+        deleteCountry(id, (error, wasDeleted) => {
+            if (error) reject(error)
+            else resolve(wasDeleted)
+        })
+    })
+}
 
-export { saveFavoriteCountry, listFavoriteCountries, getFavoriteById,updateFavoriteCountry}
+
+export { saveFavoriteCountry, listFavoriteCountries, getFavoriteById,updateFavoriteCountry,deleteFavoriteCountry}
