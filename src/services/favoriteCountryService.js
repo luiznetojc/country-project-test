@@ -1,5 +1,5 @@
 import { searchCountryByName } from "./countryService.js"
-import { createCountry } from "../repositories/FavoriteCountryRepository.js"
+import { createCountry, getAllCountries } from "../repositories/FavoriteCountryRepository.js"
 
 const saveFavoriteCountry = async (countryName) => {
     const result = await searchCountryByName(countryName)
@@ -17,17 +17,29 @@ const saveFavoriteCountry = async (countryName) => {
         region: country.region,
         population: country.population
     }
-    console.log(countryData)
-
     return new Promise((resolve, reject) => {
-        createCountry(countryData, (error, savedRecord) => {
+        createCountry(countryData, (error, savedRecords) => {
             if (error) {
                 reject(error)
             } else {
-                resolve(savedRecord)
+                resolve(savedRecords)
             }
         })
     })
 }
 
-export { saveFavoriteCountry }
+
+const listFavoriteCountries = () => {
+    return new Promise((resolve, reject) => {
+        getAllCountries((error, savedRecords) => {
+            if (error) {
+                reject(error)
+            } else {
+                resolve(savedRecords)
+            }
+        })
+    })
+}
+
+
+export { saveFavoriteCountry, listFavoriteCountries }

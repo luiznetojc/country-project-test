@@ -1,4 +1,4 @@
-import { saveFavoriteCountry } from "../services/favoriteCountryService.js"
+import { saveFavoriteCountry, listFavoriteCountries } from "../services/favoriteCountryService.js"
 
 const createFavorite = async (req, res) => {
     const { countryName } = req.body
@@ -21,4 +21,14 @@ const createFavorite = async (req, res) => {
     }
 }
 
-export { createFavorite }
+const getFavorites = async (req, res) => {
+    try {
+        const savedRecords = await listFavoriteCountries()
+        res.status(200).json(savedRecords)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Erro ao listar países favoritos" })
+    }
+}
+
+export { createFavorite, getFavorites }
