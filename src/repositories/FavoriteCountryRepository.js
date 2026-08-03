@@ -2,7 +2,7 @@ import db from '../../database/connection.js'
 
 function createCountry(country,callback){
     const sql = `INSERT INTO FavoriteCountry (Name,Capital,Region,Population) VALUES (?, ?, ?, ?)`
-    db.run(sql, [country.nome,country.capital,country.regiao,country.populacao], function(error){
+    db.run(sql, [country.name,country.capital,country.region,country.population], function(error){
         if(error){
             callback(error,null)
         } else{
