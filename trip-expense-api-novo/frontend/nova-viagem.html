@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Viagem - Trip Expense</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="form-page">
+        <a href="index.html" class="back-link">&larr; Voltar</a>
+        <h1>Nova Viagem</h1>
+
+        <div class="error-message" id="error-message"></div>
+
+        <form id="trip-form">
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" id="title" placeholder="Ex: Férias no Havaí" required>
+            </div>
+
+            <div class="form-group">
+                <label for="destination">Destino</label>
+                <input type="text" id="destination" placeholder="Ex: Honolulu" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="start-date">Data de Início</label>
+                    <input type="date" id="start-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="end-date">Data de Fim</label>
+                    <input type="date" id="end-date" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Salvar Viagem</button>
+        </form>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/nova-viagem.js"></script>
+</body>
+</html>
