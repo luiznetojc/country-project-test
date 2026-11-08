@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Trip Expense</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="app-header">
+        <h2 id="greeting">Olá!</h2>
+        <button class="btn-logout" onclick="logout()">Sair</button>
+    </header>
+
+    <main class="dashboard-content">
+        <div class="dashboard-toolbar">
+            <h1>Minhas Viagens</h1>
+            <button class="btn-new-trip" onclick="window.location.href='nova-viagem.html'">+ Nova Viagem</button>
+        </div>
+
+        <div id="trips-container" class="trips-grid">
+            
+        </div>
+    </main>
+
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
